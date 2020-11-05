@@ -1,0 +1,40 @@
+for(i=0;j<n;i=(i+1)%n)//while there are uncompleted processes
+ {
+  if(r[i]>0&&sp>=a[i])	//find the next uncompleted process 
+			//which has already or just arrived
+  {
+   f=true;
+   if(r[i]<=q)	//if the process requests for time less than the quantum
+    time=r[i];	//time to be alloted in this turn is the complete requested time
+   else time=q;	//else, it is the quantum time
+   //schedule the process
+   t[i]+=time,r[i]-=time,order.push_back(i+1);
+   if(r[i]==0) j++;	//if the process has got completed, increment j
+   for(k=0;k<n;k++)	//for each arrived processes incompleted after this scheduling
+    if(r[k]!=0&&k!=i&&a[k]<sp+time)
+     if(!(a[k]<=sp))	//if they arrived while scheduling this process
+      w[k]+=sp+time-a[k],t[i]+=sp+time-a[k];
+    else
+      w[k]+=time,t[k]+=time;//add time to their wait times and turn-around times
+   sp+=time;
+   continue;
+  }
+  if(i==n-1)
+  {
+   if(!f)
+   //now there are no more arrived processes to be scheduled
+   //so change sp to the arrival time of next arriving process
+   {
+    int it;
+    int diff=0;//diff between present time spent and arrivaltime of next arriving process
+    for(it=0;it<n;it++)
+     if(sp<a[it])//if process has'nt yet arrived
+     {
+      if(diff==0) diff=a[it]-sp;
+      else if(diff>a[it]-sp) diff=a[it]-sp;
+     }
+    sp+=diff;
+   }
+   f=false;
+  }
+ }
