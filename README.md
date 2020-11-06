@@ -49,4 +49,4 @@ ABOUT THE CODE:-
 REFERENCE FROM: 
     Silberschatz, Galvin and Gagne; Operating System Concepts; Sixth Edition; Wiley
     WIKIPEDIA
-    CODE PROJECT: KBSBNJ
+    CODE PROJECT: KBSBNG
